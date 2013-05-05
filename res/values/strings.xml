@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">llk</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="backtoBeiber">Back to JB</string>
+    <string name="title_activity_hashtag_query">HashtagQuery</string>
+    <string name="search">Search</string>
+    <string name="back">Back</string>
+    <string name="connect">Connect</string>
+    <string name="exit">Exit</string>
+
+</resources>
