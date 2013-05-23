@@ -1,12 +1,21 @@
 package com.example.tweetGet;
 
+import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.graphics.BitmapFactory;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.Menu;
@@ -20,6 +29,7 @@ import android.view.animation.LayoutAnimationController;
 import android.view.animation.TranslateAnimation;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity extends Activity
 {
@@ -43,15 +53,22 @@ public class MainActivity extends Activity
 
 				// animateListView(tweetList);
 				parseTweet parser = new parseTweet(tweetList,
-						MainActivity.this, "beiber");
+						MainActivity.this, "beiber",getApplicationContext());
 				parser.execute();
-				// tweetHandler.postDelayed(this, 10000);
+				//tweetHandler.postDelayed(this, 10000);
+	
 			}
 		};
+	
 
 		if (wifiEnabled())
 		{
 			tweetHandler.post(task);
+		}else
+		{
+			Toast.makeText(MainActivity.this, "No network connection going to load previous tweets",Toast.LENGTH_LONG).show();
+			loadCache(tweetList);
+			
 		}
 
 	}
@@ -116,6 +133,41 @@ public class MainActivity extends Activity
 			return false;
 		} else
 			return true;
+	}
+	
+	public void loadCache(ListView lv)
+	{
+		
+		 DbHelper dbhelper = new DbHelper(this);
+		SQLiteDatabase db = dbhelper.getWritableDatabase();
+
+		String [] columns = {DbHelper.USERNAME,DbHelper.TWEET,DbHelper.DATE,DbHelper.PICTURE};
+		Cursor cursor = db.query(DbHelper.TABLE_NAME, columns, null,
+				null, null, null, null);
+		
+		cursor.moveToFirst();
+		ArrayList<TweetData> items = new ArrayList<TweetData>();
+		
+		while (cursor.moveToNext())
+		{
+			String user = cursor.getString(cursor
+					.getColumnIndex(DbHelper.USERNAME));
+			String tweet = cursor.getString(cursor
+					.getColumnIndex(DbHelper.TWEET));
+
+			String date = cursor.getString(cursor.getColumnIndex(DbHelper.DATE));
+			
+			TweetData current = new TweetData(tweet,user,date);
+			byte[] bb = cursor.getBlob(cursor.getColumnIndex(DbHelper.PICTURE));
+	
+			current.setPic(BitmapFactory.decodeByteArray(bb, 0, bb.length));
+			
+			items.add(current);
+		}
+		
+		CustomListViewAdapter lva = new CustomListViewAdapter(this,MainActivity.this,items);
+		lv.setAdapter(lva);
+		
 	}
 
 }

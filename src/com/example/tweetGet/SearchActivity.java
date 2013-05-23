@@ -34,7 +34,7 @@ public class SearchActivity extends Activity
 				String hashTag = searchField.getText().toString();
 
 				parseTweet parser = new parseTweet(tweets, SearchActivity.this,
-						hashTag);
+						hashTag,getApplicationContext());
 
 				parser.execute();
 			}

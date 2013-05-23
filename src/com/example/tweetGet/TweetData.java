@@ -18,6 +18,13 @@ public class TweetData
 		this.setUserID(userId);
 		this.setDateTime(dateTime);
 	}
+	
+	public TweetData(String tweet,String userId,String dateTime)
+	{
+		this.tweet = tweet;
+		this.userID= userId;
+		this.dateTime=dateTime;
+	}
 
 	public String getTweet()
 	{

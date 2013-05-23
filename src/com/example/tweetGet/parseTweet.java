@@ -1,7 +1,6 @@
 package com.example.tweetGet;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -14,42 +13,49 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.ListView;
 
-public class parseTweet extends AsyncTask<Void, Void, List<TweetData>>
+public class parseTweet extends AsyncTask<Void, Void, ArrayList<TweetData>>
 {
 
 	private String tweeturl = "http://search.twitter.com/search.json?q=%23";
 	private ListView tweetList;
 	private Activity context;
-
-	public parseTweet(ListView lv, Activity context, String hashtag)
+	private Context c;
+	private ArrayList<TweetData> items;
+	
+	public parseTweet(ListView lv, Activity context, String hashtag,Context c)
 	{
 		tweetList = lv;
 		this.context = context;
 		tweeturl = tweeturl + hashtag;
+		this.c=c;
 	}
 
-	protected void onPostExecute(List<TweetData> items)
+	protected void onPostExecute(ArrayList<TweetData> items)
 	{
-		CustomListViewAdapter adapter = new CustomListViewAdapter(context,
+		this.items=items;
+		CustomListViewAdapter adapter = new CustomListViewAdapter (context,c,
 				items);
 		tweetList.setAdapter(adapter);
+		
+	
 	}
 
 	@Override
-	protected List<TweetData> doInBackground(Void... params)
+	protected ArrayList<TweetData> doInBackground(Void... params)
 	{
-		List<TweetData> items = new ArrayList<TweetData>();
+		ArrayList<TweetData> items = new ArrayList<TweetData>();
 
 		try
 		{
 
 			JSONArray sessions = getJsonArray(tweeturl);
 
-			// only get text, get image later via sync.
+			// only get text, get images later via async.
 			for (int i = 0; i < sessions.length(); ++i)
 			{
 
@@ -72,7 +78,7 @@ public class parseTweet extends AsyncTask<Void, Void, List<TweetData>>
 
 			e.printStackTrace();
 		}
-
+		
 		return items;
 	}
 
@@ -95,6 +101,12 @@ public class parseTweet extends AsyncTask<Void, Void, List<TweetData>>
 			Log.d("exception", "fails to retrive JSON");
 		}
 		return null;
+	}
+	
+	
+	public ArrayList<TweetData> getItems()
+	{
+		return items;
 	}
 
 }

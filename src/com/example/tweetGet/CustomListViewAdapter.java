@@ -16,11 +16,12 @@ public class CustomListViewAdapter extends BaseAdapter
 
 	LayoutInflater inflater;
 	List<TweetData> items;
-
-	public CustomListViewAdapter(Activity context, List<TweetData> items)
+	Context c;
+	
+	public CustomListViewAdapter(Activity context,Context c, List<TweetData> items)
 	{
 		super();
-
+		this.c=c;
 		this.items = items;
 		this.inflater = (LayoutInflater) context
 				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -42,10 +43,8 @@ public class CustomListViewAdapter extends BaseAdapter
 			holder = new ViewHolder();
 			holder.tweetText = (TextView) convertView.findViewById(R.id.tweet);
 			holder.userId = (TextView) convertView.findViewById(R.id.userName);
-			holder.dateAndTime = (TextView) convertView
-					.findViewById(R.id.dateAndTime);
-			holder.profilePicture = (ImageView) convertView
-					.findViewById(R.id.profileImage);
+			holder.dateAndTime = (TextView) convertView.findViewById(R.id.dateAndTime);
+			holder.profilePicture = (ImageView) convertView.findViewById(R.id.profileImage);
 
 			convertView.setTag(holder);
 		} else
@@ -68,7 +67,7 @@ public class CustomListViewAdapter extends BaseAdapter
 		if (item.getPic() == null)
 		{
 			ImageDownloader i = new ImageDownloader(position, holder,
-					item.getProfilePicture(), item);
+					item.getProfilePicture(), item,c);
 			i.execute();
 
 		} else
