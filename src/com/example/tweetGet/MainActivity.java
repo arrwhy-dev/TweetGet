@@ -53,7 +53,7 @@ public class MainActivity extends Activity
 
 				// animateListView(tweetList);
 				parseTweet parser = new parseTweet(tweetList,
-						MainActivity.this, "beiber",getApplicationContext());
+						MainActivity.this, "Android",getApplicationContext());
 				parser.execute();
 				//tweetHandler.postDelayed(this, 10000);
 	
