@@ -42,7 +42,7 @@ public class MainActivity extends Activity
 
 		final ListView tweetList = (ListView) findViewById(R.id.listView);
 		TextView tv = new TextView(this);
-		tv.setText("tweets feat. #beiber");
+		tv.setText("tweets about Android");
 		tweetList.addHeaderView(tv);
 		final Handler tweetHandler = new Handler();
 
@@ -51,7 +51,7 @@ public class MainActivity extends Activity
 			public void run()
 			{
 
-				// animateListView(tweetList);
+			 animateListView(tweetList);
 				parseTweet parser = new parseTweet(tweetList,
 						MainActivity.this, "Android",getApplicationContext());
 				parser.execute();

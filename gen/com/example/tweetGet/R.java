@@ -34,20 +34,21 @@ public final class R {
         public static final int twitter=0x7f020002;
     }
     public static final class id {
-        public static final int Search=0x7f09000c;
-        public static final int action_settings=0x7f09000b;
-        public static final int back=0x7f09000d;
-        public static final int button1=0x7f090001;
-        public static final int dateAndTime=0x7f090008;
-        public static final int editText1=0x7f090000;
-        public static final int group1=0x7f090009;
-        public static final int item1=0x7f09000a;
-        public static final int listView=0x7f090003;
-        public static final int listView1=0x7f090002;
-        public static final int profileImage=0x7f090005;
-        public static final int relativeLayout1=0x7f090004;
-        public static final int tweet=0x7f090006;
-        public static final int userName=0x7f090007;
+        public static final int LinearLayout1=0x7f090000;
+        public static final int Search=0x7f09000d;
+        public static final int action_settings=0x7f09000c;
+        public static final int back=0x7f09000e;
+        public static final int button1=0x7f090002;
+        public static final int dateAndTime=0x7f090009;
+        public static final int editText1=0x7f090001;
+        public static final int group1=0x7f09000a;
+        public static final int item1=0x7f09000b;
+        public static final int listView=0x7f090004;
+        public static final int listView1=0x7f090003;
+        public static final int profileImage=0x7f090006;
+        public static final int relativeLayout1=0x7f090005;
+        public static final int tweet=0x7f090007;
+        public static final int userName=0x7f090008;
     }
     public static final class layout {
         public static final int activity_hashtag_query=0x7f030000;
