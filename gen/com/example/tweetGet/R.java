@@ -37,7 +37,7 @@ public final class R {
         public static final int LinearLayout1=0x7f090000;
         public static final int Search=0x7f09000d;
         public static final int action_settings=0x7f09000c;
-        public static final int back=0x7f09000e;
+        public static final int back=0x7f09000f;
         public static final int button1=0x7f090002;
         public static final int dateAndTime=0x7f090009;
         public static final int editText1=0x7f090001;
@@ -47,6 +47,7 @@ public final class R {
         public static final int listView1=0x7f090003;
         public static final int profileImage=0x7f090006;
         public static final int relativeLayout1=0x7f090005;
+        public static final int settings=0x7f09000e;
         public static final int tweet=0x7f090007;
         public static final int userName=0x7f090008;
     }
@@ -54,6 +55,7 @@ public final class R {
         public static final int activity_hashtag_query=0x7f030000;
         public static final int activity_main=0x7f030001;
         public static final int item_row=0x7f030002;
+        public static final int preferenceslayout=0x7f030003;
     }
     public static final class menu {
         public static final int context=0x7f080000;
