@@ -1,15 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
 
-    <PreferenceCategory android:title="Sample Category" />
+    <PreferenceCategory android:title="Preferences" />
 
     <CheckBoxPreference
         android:defaultValue="true"
-        android:key="PREF_CHECK_BOX"
-        android:summary="Check box summary "
-        android:title="check box preference" />
+        android:key="Enable_Caching"
+        android:summary="Enable to allow offline access to tweets"
+        android:title="Enable Tweet Caching" />
 
-    <PreferenceCategory>
-    </PreferenceCategory>
+    <EditTextPreference
+        android:defaultValue="Android"
+        android:key="Default_Hashtag"
+        android:summary="Enter your Default HashTag to Query for"
+        android:title="Default HashTag" />
+    
+    
+        <ListPreference
+                android:key="Tweet_Type"
+                android:title="Default Tweet Type"
+                android:summary="Decide if you want popular, recent or a mixture of tweets"
+                android:entries="@array/tweet_result_type"
+                android:entryValues="@array/tweet_result_type_values"
+                android:dialogTitle="Default Tweet Type" />
+        
+             <ListPreference
+                android:key="Num_Tweets"
+                android:title="Number of Tweets"
+                android:summary="Decide on the number of tweets you'd like to load by default"
+                android:entries="@array/tweet_results_num"
+                android:entryValues="@array/tweet_results_num"
+                android:dialogTitle="Number of Tweets" />
+        
 
 </PreferenceScreen>
