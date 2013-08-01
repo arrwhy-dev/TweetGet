@@ -8,6 +8,8 @@ main page.
 
 Users can also search for any hashtag to receive a list of tweets
 
+![Pin Progress Button Android developer][1]
+
 The app features a variety of settins which allow for:
 <ul>
 <li>Tweet caching/offiline mode</li>
@@ -21,3 +23,4 @@ The project is simple and is updated with new features every now and then when I
 <b>Feel free to take the source code and do what ever you want with it.</b>
 
 
+[1]:http://www.imagebam.com/image/b79452268256053
