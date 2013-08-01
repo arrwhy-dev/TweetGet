@@ -1,8 +1,5 @@
 package com.TweetGet.Tasks;
 
-import java.io.InputStream;
-import java.io.InputStreamReader;
-
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpGet;
@@ -15,8 +12,6 @@ import android.util.Log;
 
 import com.TweetGet.EndPoints.ApiEndPoints;
 import com.TweetGet.EndPoints.ApiHeaders;
-import com.TweetGet.Models.TweetModel;
-import com.google.gson.Gson;
 
 public class SearchFeedTask extends AsyncTask<String, Void, String> {
 

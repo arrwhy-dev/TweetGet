@@ -8,7 +8,6 @@ import org.json.JSONObject;
 
 import android.content.Context;
 import android.os.AsyncTask;
-import android.telephony.gsm.GsmCellLocation;
 import android.util.Log;
 import android.widget.ListView;
 
