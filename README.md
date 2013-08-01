@@ -19,6 +19,13 @@ The app features a variety of settins which allow for:
 </ul>
 
 
-The project is simple and is updated with new features every now and then when I find free time.
+
+
+
+The project is simple and is updated every now and then, most of the time I can't make up my mind on paticular features
+and end up scrapping them. I'll eventually branch out those experimental release into their own git branches.
+
+The app was orginally built using twitter's api v1.0, but since it's dperication the app utilizes the v1.1 api
+and it's use of oauth.
 
 <b>Feel free to take the source code and do what ever you want with it.</b>
