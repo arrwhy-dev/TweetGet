@@ -8,39 +8,32 @@ import org.json.JSONObject;
 
 import android.content.Context;
 import android.os.AsyncTask;
+import android.telephony.gsm.GsmCellLocation;
 import android.util.Log;
 import android.widget.ListView;
 
 import com.TweetGet.Adapters.TweetListAdapter;
 import com.TweetGet.EndPoints.ApiEndPoints;
+import com.TweetGet.Fragments.MainFeedFragment;
 import com.TweetGet.Models.TweetModel;
 import com.TweetGet.activites.MainActivity;
 
+public class TweetsParseTask extends
+		AsyncTask<Void, Void, ArrayList<TweetModel>> {
 
-public class TweetsParseTask extends AsyncTask<Void, Void, ArrayList<TweetModel>> {
-
-	private ListView tweetList;
+	private ListView mListView;
 	private Context mContext;
-	private ArrayList<TweetModel> items;
 
 	public TweetsParseTask() {
 
-		tweetList = MainActivity.tweetList;
 		mContext = MainActivity.mContext;
+		mListView = MainFeedFragment.mTweetList;
 
 	}
-	
-	public TweetsParseTask(ListView lv , Context context)
-	{
-		tweetList=lv;
-		mContext=context;
-	}
 
-	protected void onPostExecute(ArrayList<TweetModel> items) {
-		this.items = items;
-		TweetListAdapter adapter = new TweetListAdapter(mContext, items);
-		tweetList.setAdapter(adapter);
-
+	public TweetsParseTask(ListView lv, Context context) {
+		mListView = lv;
+		mContext = context;
 	}
 
 	@Override
@@ -53,7 +46,7 @@ public class TweetsParseTask extends AsyncTask<Void, Void, ArrayList<TweetModel>
 
 			// only get text, get images later via async.
 			for (int i = 0; i < sessions.length(); ++i) {
-
+				
 				JSONObject temp = sessions.getJSONObject(i);
 				JSONObject user = temp.getJSONObject("user");
 
@@ -81,9 +74,8 @@ public class TweetsParseTask extends AsyncTask<Void, Void, ArrayList<TweetModel>
 		try {
 
 			JSONObject root = new JSONObject(s);
-
 			JSONArray sessions = root.getJSONArray("statuses");
-		
+
 			return sessions;
 		} catch (Exception e) {
 			Log.d("exception", "fails to retrive JSON");
@@ -91,8 +83,10 @@ public class TweetsParseTask extends AsyncTask<Void, Void, ArrayList<TweetModel>
 		return null;
 	}
 
-	public ArrayList<TweetModel> getItems() {
-		return items;
+	protected void onPostExecute(ArrayList<TweetModel> tweetList) {
+		TweetListAdapter adapter = new TweetListAdapter(mContext, tweetList);
+		mListView.setAdapter(adapter);
+
 	}
 
 }

@@ -15,6 +15,7 @@ public final class R {
         public static final int slide_in_right=0x7f040003;
         public static final int slide_out_left=0x7f040004;
         public static final int slide_out_right=0x7f040005;
+        public static final int top_down=0x7f040006;
     }
     public static final class array {
         public static final int tweet_result_type=0x7f050000;
@@ -32,6 +33,7 @@ public final class R {
          */
         public static final int activity_horizontal_margin=0x7f060000;
         public static final int activity_vertical_margin=0x7f060001;
+        public static final int list_item_vertial_margin=0x7f060002;
     }
     public static final class drawable {
         public static final int gradient_bg=0x7f020000;
@@ -40,30 +42,31 @@ public final class R {
     }
     public static final class id {
         public static final int LinearLayout1=0x7f0a0000;
-        public static final int Search=0x7f0a0010;
-        public static final int action_settings=0x7f0a000f;
-        public static final int back=0x7f0a0011;
+        public static final int Search=0x7f0a0011;
+        public static final int action_settings=0x7f0a0010;
         public static final int backdrop=0x7f0a0006;
         public static final int button1=0x7f0a0002;
         public static final int cover=0x7f0a0005;
-        public static final int dateAndTime=0x7f0a000c;
+        public static final int dateAndTime=0x7f0a000d;
         public static final int editText1=0x7f0a0001;
-        public static final int group1=0x7f0a000d;
+        public static final int group1=0x7f0a000e;
         public static final int image=0x7f0a0007;
-        public static final int item1=0x7f0a000e;
-        public static final int listView=0x7f0a0004;
+        public static final int item1=0x7f0a000f;
         public static final int listView1=0x7f0a0003;
-        public static final int profileImage=0x7f0a0009;
-        public static final int relativeLayout1=0x7f0a0008;
-        public static final int tweet=0x7f0a000a;
-        public static final int userName=0x7f0a000b;
+        public static final int main_feed_fragment=0x7f0a0004;
+        public static final int profileImage=0x7f0a000a;
+        public static final int relativeLayout1=0x7f0a0009;
+        public static final int tweet=0x7f0a000b;
+        public static final int tweetList=0x7f0a0008;
+        public static final int userName=0x7f0a000c;
     }
     public static final class layout {
         public static final int activity_hashtag_query=0x7f030000;
         public static final int activity_main=0x7f030001;
         public static final int activity_transparent=0x7f030002;
-        public static final int item_row=0x7f030003;
-        public static final int preferenceslayout=0x7f030004;
+        public static final int fragment_main_feed=0x7f030003;
+        public static final int item_row=0x7f030004;
+        public static final int preferenceslayout=0x7f030005;
     }
     public static final class menu {
         public static final int context=0x7f090000;
