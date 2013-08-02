@@ -9,16 +9,14 @@ import android.os.AsyncTask;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.TweetGet.Models.TweetModel;
-
 public class ImageDownloaderUtils extends AsyncTask<Void, Void, Bitmap> {
 	private int mPosition;
 	private ViewHolder mHolder;
 	private String url;
-	private TweetModel item;
+	private com.TweetGet.Models.Status item;
 
 	public ImageDownloaderUtils(int position, ViewHolder holder, String url,
-			TweetModel item, Context c) {
+			com.TweetGet.Models.Status item, Context c) {
 		mPosition = position;
 		mHolder = holder;
 		this.item = item;
@@ -29,7 +27,7 @@ public class ImageDownloaderUtils extends AsyncTask<Void, Void, Bitmap> {
 	protected void onPostExecute(Bitmap bitmap) {
 		if (mHolder.position == mPosition) {
 			mHolder.profilePicture.setImageBitmap(bitmap);
-			item.setPic(bitmap);
+			item.getUser().setProfilePic(bitmap);
 
 		}
 	}

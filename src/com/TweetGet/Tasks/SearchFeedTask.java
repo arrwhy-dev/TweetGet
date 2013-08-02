@@ -1,22 +1,39 @@
 package com.TweetGet.Tasks;
 
+import java.io.InputStream;
+import java.io.InputStreamReader;
+
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.params.BasicHttpParams;
-import org.apache.http.util.EntityUtils;
 
+import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.widget.ListView;
 
+import com.TweetGet.Adapters.TweetListAdapter;
 import com.TweetGet.EndPoints.ApiEndPoints;
 import com.TweetGet.EndPoints.ApiHeaders;
+import com.TweetGet.Fragments.MainFeedFragment;
+import com.TweetGet.Models.statusesContainer;
+import com.TweetGet.activites.MainActivity;
+import com.google.gson.Gson;
 
-public class SearchFeedTask extends AsyncTask<String, Void, String> {
+public class SearchFeedTask extends AsyncTask<String, Void, statusesContainer> {
+	
+	private Context mContext;
+	private ListView mListView;
+	
+	public SearchFeedTask(){
+		mContext = MainActivity.mContext;
+		mListView = MainFeedFragment.mTweetList;
+	}
 
 	@Override
-	protected String doInBackground(String... params) {
+	protected statusesContainer doInBackground(String... params) {
 
 		try {
 			DefaultHttpClient httpclient = new DefaultHttpClient(
@@ -32,22 +49,11 @@ public class SearchFeedTask extends AsyncTask<String, Void, String> {
 			HttpResponse response = httpclient.execute(httpget);
 			HttpEntity entity = response.getEntity();
 			
-			//InputStream inputStream = entity.getContent();
+			InputStream inputStream = entity.getContent();
 
-			
-			/* 
-			 * TODO TODO TODO TODO 
-			 * BUILD OUT THE TWEET MODEL SO YOU CAN USE
-			 * GSON INSTEAD OF PARSING THOSE FRIGGIN STRINGS!!!!
-			 */
-		//	Gson gm = new Gson();
-		//	TweetModel tweet = new Gson().fromJson(new InputStreamReader(inputStream), TweetModel.class);
-					
-			
-			
-			String result = EntityUtils.toString(entity);
+			statusesContainer statuses = new Gson().fromJson(new InputStreamReader(inputStream), statusesContainer.class);
 
-			return result;
+			return statuses;
 		} catch (Exception e) {
 			Log.e("GetFeedTask", "Error:" + e.getMessage());
 			return null;
@@ -55,12 +61,15 @@ public class SearchFeedTask extends AsyncTask<String, Void, String> {
 	}
 
 	@Override
-	protected void onPostExecute(String jsonText) {
+	protected void onPostExecute(statusesContainer statuses) {
 		try {
 
-			ApiEndPoints.setJsonString(jsonText);
+		//	ApiEndPoints.setJsonString(jsonText);
 
-			new TweetsParseTask().execute();
+			//new TweetsParseTask().execute();
+			
+			TweetListAdapter adapter = new TweetListAdapter(mContext, statuses);
+			mListView.setAdapter(adapter);
 		} catch (Exception e) {
 			Log.e("GetFeedTask", "Error:" + e.getMessage());
 		}

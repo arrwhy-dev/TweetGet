@@ -83,8 +83,7 @@ public class TweetsParseTask extends
 	}
 
 	protected void onPostExecute(ArrayList<TweetModel> tweetList) {
-		TweetListAdapter adapter = new TweetListAdapter(mContext, tweetList);
-		mListView.setAdapter(adapter);
+	
 
 	}
 

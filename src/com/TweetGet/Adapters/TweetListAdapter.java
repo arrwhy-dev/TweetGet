@@ -1,7 +1,5 @@
 package com.TweetGet.Adapters;
 
-import java.util.List;
-
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Rect;
@@ -15,7 +13,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.TweetGet.R;
-import com.TweetGet.Models.TweetModel;
+import com.TweetGet.Models.Status;
+import com.TweetGet.Models.statusesContainer;
 import com.TweetGet.Utils.ImageDownloaderUtils;
 import com.TweetGet.Utils.ImageDownloaderUtils.ViewHolder;
 import com.TweetGet.activites.MainActivity;
@@ -26,15 +25,15 @@ public class TweetListAdapter extends BaseAdapter
 {
 
 	LayoutInflater inflater;
-	List<TweetModel> items;
+	statusesContainer statuses;
 	Context mContext;
 	Activity mActivity;
 	
-	public TweetListAdapter(Context context,List<TweetModel> items)
+	public TweetListAdapter(Context context,statusesContainer items)
 	{
 		super();
 		this.mContext=context;
-		this.items = items;
+		statuses = items;
 		this.inflater = (LayoutInflater) context
 				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		mActivity=MainActivity.mActivity;
@@ -45,7 +44,7 @@ public class TweetListAdapter extends BaseAdapter
 	public View getView(final int position, View convertView, ViewGroup parent)
 	{
 
-		TweetModel item = items.get(position);
+		Status item = statuses.getStatuses().get(position);
 
 		ViewHolder holder;
 
@@ -84,8 +83,8 @@ public class TweetListAdapter extends BaseAdapter
 			holder = (ViewHolder) convertView.getTag();
 		}
 
-		holder.tweetText.setText(item.getTweet());
-		holder.userId.setText(item.getUserID());
+		holder.tweetText.setText(item.getText());
+		holder.userId.setText(item.getUser().getScreenName());
 		holder.dateAndTime.setText(item.getDateTime());
 		holder.position = position;
 	
@@ -95,17 +94,17 @@ public class TweetListAdapter extends BaseAdapter
 		return convertView;
 	}
 
-	public void getProfilePic(TweetModel item, int position, ViewHolder holder)
+	public void getProfilePic(Status item, int position, ViewHolder holder)
 	{
-		if (item.getPic() == null)
+		if (item.getUser().getProfilePic() == null)
 		{
 			ImageDownloaderUtils i = new ImageDownloaderUtils(position, holder,
-					item.getProfilePicture(), item,mContext);
+					item.getUser().getProfileImageUrl(), item,mContext);
 			i.execute();
 
 		} else
 		{
-			holder.profilePicture.setImageBitmap(item.getPic());
+			holder.profilePicture.setImageBitmap(item.getUser().getProfilePic());
 
 		}
 
@@ -115,7 +114,7 @@ public class TweetListAdapter extends BaseAdapter
 	public int getCount()
 	{
 
-		return items.size();
+		return statuses.getStatuses().size();
 	}
 
 	@Override
