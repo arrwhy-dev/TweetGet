@@ -1,27 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-        <string-array name="tweet_result_type">
-        <item >Recent</item>
-        <item >Popular</item>
-        <item >Mixed</item>
-        
+
+    <string-array name="tweet_result_type">
+        <item>Recent</item>
+        <item>Popular</item>
+        <item>Mixed</item>
+    </string-array>
+    <string-array name="tweet_result_type_values">
+        <item>recent</item>
+        <item>popular</item>
+        <item>mixed</item>
+    </string-array>
+    <string-array name="tweet_results_num">
+        <item>15</item>
+        <item>30</item>
+        <item>45</item>
+        <item>60</item>
+        <item>75</item>
+        <item>90</item>
+        <item>100</item>
     </string-array>
     
-        
-              <string-array name="tweet_result_type_values">
-        <item >recent</item>
-        <item >popular</item>
-        <item >mixed</item>
-        
+    <string-array name="nav_drawer_menu_options">
+        <item>Topic</item>
+        <item>User</item>
     </string-array>
-            <string-array name="tweet_results_num">
-        <item >15</item>
-        <item >30</item>
-        <item >45</item>
-        <item >60</item>
-        <item >75</item>
-        <item >90</item>
-        <item >100</item>
-        
-    </string-array>
+
 </resources>

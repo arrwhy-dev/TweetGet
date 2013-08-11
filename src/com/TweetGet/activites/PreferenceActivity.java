@@ -37,5 +37,5 @@ public class PreferenceActivity extends android.preference.PreferenceActivity
 		context.startActivity(i);
 
 	}
-
+	
 }

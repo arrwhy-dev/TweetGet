@@ -13,7 +13,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.TweetGet.R;
-import com.TweetGet.Models.Status;
+import com.TweetGet.Models.TweetStatus;
 import com.TweetGet.Models.statusesContainer;
 import com.TweetGet.Utils.ImageDownloaderUtils;
 import com.TweetGet.Utils.ImageDownloaderUtils.ViewHolder;
@@ -44,7 +44,7 @@ public class TweetListAdapter extends BaseAdapter
 	public View getView(final int position, View convertView, ViewGroup parent)
 	{
 
-		Status item = statuses.getStatuses().get(position);
+		TweetStatus item = statuses.getStatuses().get(position);
 
 		ViewHolder holder;
 
@@ -94,7 +94,7 @@ public class TweetListAdapter extends BaseAdapter
 		return convertView;
 	}
 
-	public void getProfilePic(Status item, int position, ViewHolder holder)
+	public void getProfilePic(TweetStatus item, int position, ViewHolder holder)
 	{
 		if (item.getUser().getProfilePic() == null)
 		{

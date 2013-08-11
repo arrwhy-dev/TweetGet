@@ -14,8 +14,15 @@ import android.util.Log;
 
 import com.TweetGet.EndPoints.ApiEndPoints;
 import com.TweetGet.EndPoints.ApiHeaders;
+import com.TweetGet.Managers.BearerTokenManager.BearerTokenListener;
 
 public class BearerTokenTask extends AsyncTask<Void, Void, String> {
+
+	private BearerTokenListener mListener;
+
+	public BearerTokenTask(BearerTokenListener listener) {
+		mListener = listener;
+	}
 
 	@Override
 	protected String doInBackground(Void... params) {
@@ -48,13 +55,18 @@ public class BearerTokenTask extends AsyncTask<Void, Void, String> {
 		try {
 			JSONObject root = new JSONObject(jsonText);
 			String bearer_token = root.getString("access_token");
-
-			ApiEndPoints.setBearerToken(bearer_token);
-			new SearchFeedTask().execute();
-
+			mListener.onSuccess(bearer_token);
 		} catch (Exception e) {
 			Log.e("GetBearerTokenTask", "Error:" + e.getMessage());
 		}
+
+	}
+
+	public interface BearerTokenTaskListener {
+
+		public void onSuccess();
+
+		public void onFailure();
 	}
 
 }

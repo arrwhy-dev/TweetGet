@@ -11,11 +11,10 @@ public class TweetgetApplication extends Application {
 	public void onCreate() {
 		super.onCreate();
 
-		sContext = this;
-
+		sContext = getApplicationContext();
 	}
 
-	public static final Context getAppContext() {
+	public static final Context getContext() {
 		return sContext;
 	}
 

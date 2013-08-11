@@ -17,41 +17,49 @@ import android.widget.ListView;
 import com.TweetGet.Adapters.TweetListAdapter;
 import com.TweetGet.EndPoints.ApiEndPoints;
 import com.TweetGet.EndPoints.ApiHeaders;
-import com.TweetGet.Fragments.MainFeedFragment;
+import com.TweetGet.Managers.BearerTokenManager;
 import com.TweetGet.Models.statusesContainer;
+import com.TweetGet.Utils.TweetDatabaseUtils;
 import com.TweetGet.activites.MainActivity;
 import com.google.gson.Gson;
 
 public class SearchFeedTask extends AsyncTask<String, Void, statusesContainer> {
-	
+
 	private Context mContext;
 	private ListView mListView;
-	
-	public SearchFeedTask(){
-		mContext = MainActivity.mContext;
-		mListView = MainFeedFragment.mTweetList;
+
+	public SearchFeedTask(Context context, ListView listview) {
+		mContext = context;
+		mListView = listview;
 	}
 
 	@Override
 	protected statusesContainer doInBackground(String... params) {
 
 		try {
+
+			String authToken = BearerTokenManager.getBearerTokenSynch(mContext);
+
 			DefaultHttpClient httpclient = new DefaultHttpClient(
 					new BasicHttpParams());
 			HttpGet httpget = new HttpGet(ApiEndPoints.TWITTER_DEFAULT_SEARCH);
 
 			httpget.setHeader(ApiHeaders.AUTHORIZATION, ApiHeaders.BEARER
-					 + ApiEndPoints.getBearerToken());
+					+ authToken);
 
 			httpget.setHeader(ApiHeaders.CONTENT_TYPE,
 					ApiHeaders.APPLICATION_JSON);
 
 			HttpResponse response = httpclient.execute(httpget);
 			HttpEntity entity = response.getEntity();
-			
+
 			InputStream inputStream = entity.getContent();
 
-			statusesContainer statuses = new Gson().fromJson(new InputStreamReader(inputStream), statusesContainer.class);
+			statusesContainer statuses = new Gson()
+					.fromJson(new InputStreamReader(inputStream),
+							statusesContainer.class);
+
+			TweetDatabaseUtils.insertTweetsToDatabase(statuses, mContext);
 
 			return statuses;
 		} catch (Exception e) {
@@ -63,13 +71,9 @@ public class SearchFeedTask extends AsyncTask<String, Void, statusesContainer> {
 	@Override
 	protected void onPostExecute(statusesContainer statuses) {
 		try {
-
-		//	ApiEndPoints.setJsonString(jsonText);
-
-			//new TweetsParseTask().execute();
-			
 			TweetListAdapter adapter = new TweetListAdapter(mContext, statuses);
 			mListView.setAdapter(adapter);
+			MainActivity.mTweetListAdapter=adapter;
 		} catch (Exception e) {
 			Log.e("GetFeedTask", "Error:" + e.getMessage());
 		}

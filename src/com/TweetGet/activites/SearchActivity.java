@@ -10,7 +10,6 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ListView;
 
 import com.TweetGet.R;
 
@@ -23,13 +22,10 @@ public class SearchActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_hashtag_query);
 
-		final ListView tweets = (ListView) findViewById(R.id.listView1);
-
 	}
 
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
-		// Respond to the action bar's Up/Home button
 		case android.R.id.home:
 			finish();
 			overridePendingTransition(R.anim.slide_out_right,
@@ -37,12 +33,6 @@ public class SearchActivity extends Activity {
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
-	}
-
-	@Override
-	public void onBackPressed() {
-		super.onBackPressed();
-		overridePendingTransition(R.anim.slide_out_right, R.anim.slide_in_right);
 	}
 
 	@Override
@@ -59,10 +49,16 @@ public class SearchActivity extends Activity {
 		inflate.inflate(R.menu.context, menu);
 	}
 
+	@Override
+	public void onBackPressed() {
+		super.onBackPressed();
+		overridePendingTransition(R.anim.slide_out_right, R.anim.slide_in_right);
+	}
+
 	public static void newInstance(Context context) {
 		Intent i = new Intent(context, SearchActivity.class);
 		context.startActivity(i);
-		
+
 	}
 
 }

@@ -7,10 +7,10 @@ import com.google.gson.annotations.SerializedName;
 public class statusesContainer {
 	
 	@SerializedName("statuses")
-	List<Status> statuses;
+	private List<TweetStatus> statuses;
 	
 	
-	public List<Status>getStatuses()
+	public List<TweetStatus>getStatuses()
 	{
 		return statuses;
 	}

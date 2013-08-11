@@ -9,6 +9,8 @@
     <string name="search">Search</string>
     <string name="back">Back</string>
     <string name="connect">Connect</string>
+    <string name="drawer_open">Open navigation drawer</string>
+    <string name="drawer_close">Close navigation drawer</string>
     <string name="exit">Exit</string>
     <string name="NetworkConnectionPrompt">Please check your network connection</string>
     <string name="profile_picture">profile Picture</string>

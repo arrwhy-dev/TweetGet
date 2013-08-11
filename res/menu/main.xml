@@ -9,6 +9,8 @@
         android:id="@+id/Search"
         android:orderInCategory="1"
         android:showAsAction="always"
-        android:title="Search"/>
+        android:icon="@drawable/action_search"
+    />
+ 
 
 </menu>

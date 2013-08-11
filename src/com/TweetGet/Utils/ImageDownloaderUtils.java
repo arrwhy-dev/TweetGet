@@ -13,10 +13,10 @@ public class ImageDownloaderUtils extends AsyncTask<Void, Void, Bitmap> {
 	private int mPosition;
 	private ViewHolder mHolder;
 	private String url;
-	private com.TweetGet.Models.Status item;
+	private com.TweetGet.Models.TweetStatus item;
 
 	public ImageDownloaderUtils(int position, ViewHolder holder, String url,
-			com.TweetGet.Models.Status item, Context c) {
+			com.TweetGet.Models.TweetStatus item, Context c) {
 		mPosition = position;
 		mHolder = holder;
 		this.item = item;

@@ -16,6 +16,7 @@
         android:theme="@style/AppTheme" >
         <activity
             android:name="com.TweetGet.activites.MainActivity"
+            android:launchMode="singleTop"
             android:label="TweetGet"
             android:screenOrientation="portrait" >
             <intent-filter>
@@ -26,24 +27,31 @@
         </activity>
         <activity
             android:name="com.TweetGet.activites.SearchActivity"
-       
             android:label="@string/title_activity_hashtag_query"
+            android:parentActivityName="com.TweetGet.activites.MainActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden"
-                 android:parentActivityName="com.TweetGet.activites.MainActivity" >
-             <meta-data
-            android:name="android.support.PARENT_ACTIVITY"
-            android:value="com.TweetGet.Activites.MainActivity" />
+            android:windowSoftInputMode="stateHidden" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.TweetGet.Activites.MainActivity" />
         </activity>
         <activity
             android:name="com.TweetGet.activites.PreferenceActivity"
             android:screenOrientation="portrait" />
-            <activity
+        <activity
             android:name="com.TweetGet.activites.TransparentActivity"
             android:screenOrientation="portrait" />
-    
+
+        <service
+            android:name="com.TweetGet.Services.TweetDayDreamService"
+            android:exported="true" >
+            <intent-filter>
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <action android:name="android.service.dreams.DreamService" />
+            </intent-filter>
+        </service>
     </application>
-      
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />

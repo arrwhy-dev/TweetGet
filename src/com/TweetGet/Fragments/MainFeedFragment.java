@@ -11,27 +11,21 @@ import android.widget.TextView;
 import com.TweetGet.R;
 import com.TweetGet.EndPoints.ApiEndPoints;
 import com.TweetGet.Managers.SharedPreferencesManager;
-import com.TweetGet.Tasks.BearerTokenTask;
 import com.TweetGet.Tasks.SearchFeedTask;
 import com.TweetGet.Utils.AnimationUtils;
 import com.TweetGet.Utils.NetworkUtils;
-import com.TweetGet.activites.MainActivity;
 
 public class MainFeedFragment extends Fragment {
 
-	public static ListView mTweetList;
+	private ListView mTweetList;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 
 		View view = inflater.inflate(R.layout.fragment_main_feed, null);
-
-		// TODO FIND A BETTER WAY TO REFERENCE THESE OBJECTS AS THE CURRENT
-		// IMPLEMENTATION IS DANGEROUS.
 		mTweetList = (ListView) view.findViewById(R.id.tweetList);
 
-		MainActivity.mContext = getActivity();
 		return view;
 	}
 
@@ -50,11 +44,8 @@ public class MainFeedFragment extends Fragment {
 
 		if (NetworkUtils.wifiIsEnaled(getActivity())) {
 
-			if (ApiEndPoints.getBearerToken() == null) {
-				new BearerTokenTask().execute();
-			} else {
-				new SearchFeedTask().execute();
-			}
+			new SearchFeedTask(getActivity(), mTweetList).execute();
+
 		} else {
 			NetworkUtils.notifyWifiState(getActivity());
 		}
