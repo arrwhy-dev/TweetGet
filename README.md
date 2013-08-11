@@ -7,7 +7,9 @@ A user sets a default hashtag to query for and the app will automatically pull d
 
 Users can also search for any hashtag to receive a list of tweets
 
-<a href="http://www.imagebam.com/image/b79452268256053" target="_blank"><img src="http://thumbnails103.imagebam.com/26826/b79452268256053.jpg" alt="imagebam.com"></a>
+![Alt text](/25flow.png "Optional title")
+
+
 
 </br>
 The app features a variety of settings which allow for:
