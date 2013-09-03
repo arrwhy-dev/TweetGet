@@ -14,6 +14,8 @@
     <string name="exit">Exit</string>
     <string name="NetworkConnectionPrompt">Please check your network connection</string>
     <string name="profile_picture">profile Picture</string>
+    <string name="menu_item_search">Search</string>
+    <string name="menu_item_refresh">refresh</string>
     
 
 

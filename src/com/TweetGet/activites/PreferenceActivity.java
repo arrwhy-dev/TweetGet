@@ -1,4 +1,4 @@
-package com.TweetGet.activites;
+package com.TweetGet.Activites;
 
 import android.content.Context;
 import android.content.Intent;
@@ -7,6 +7,11 @@ import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.os.Bundle;
 
 import com.TweetGet.R;
+/*
+ * TODO: USE PREFERENCE FRAGMENTS FOR BETTER COMPATIBILITY!
+ * 
+ * 
+ */
 
 public class PreferenceActivity extends android.preference.PreferenceActivity
 		implements OnSharedPreferenceChangeListener {

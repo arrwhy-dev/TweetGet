@@ -1,10 +1,14 @@
 package com.TweetGet.Fragments;
 
+import java.lang.ref.WeakReference;
+
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -18,57 +22,78 @@ import com.TweetGet.Utils.NetworkUtils;
 public class MainFeedFragment extends Fragment {
 
 	private ListView mTweetList;
+	private TextView mHeaderView;
+	private FrameLayout mCover;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 
 		View view = inflater.inflate(R.layout.fragment_main_feed, null);
-		mTweetList = (ListView) view.findViewById(R.id.tweetList);
-
 		return view;
 	}
 
 	@Override
 	public void onViewCreated(View view, Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
-
 		super.onCreate(savedInstanceState);
+		mTweetList = (ListView) view.findViewById(R.id.tweetList);
+		mCover = (FrameLayout) view.findViewById(R.id.no_wifi_cover);
 
+		Bundle args = getArguments();
+		String query;
 		SharedPreferencesManager.init(getActivity());
 		SharedPreferencesManager ms = SharedPreferencesManager.getInstance();
 
-		String tag = getTargetUrl(ms);
+		if (args != null) {
+			query = args.getString("query");
+			query = getTargetUrl(ms, query);
+		} else {
 
-		setUpTweetList(tag);
+			query = getTargetUrl(ms);
+		}
+
+		setUpTweetList(query);
 
 		if (NetworkUtils.wifiIsEnaled(getActivity())) {
 
-			new SearchFeedTask(getActivity(), mTweetList).execute();
+			new SearchFeedTask(new WeakReference<Context>(getActivity()),
+					mTweetList).execute();
 
 		} else {
-			NetworkUtils.notifyWifiState(getActivity());
+			mCover.setVisibility(View.VISIBLE);
+			// NetworkUtils.notifyWifiState(getActivity());
 		}
 	}
 
 	private String getTargetUrl(SharedPreferencesManager ms) {
-		String tag = ms.getDefaultHashTag();
+		return getTargetUrl(ms, null);
+	}
+
+	private String getTargetUrl(SharedPreferencesManager ms, String tag) {
+		String hashTag = (tag == null) ? (ms.getDefaultHashTag()) : tag;
 		String count = ms.getTweetNum();
 		String result_type = ms.getTweetType();
 
-		ApiEndPoints.TWITTER_DEFAULT_SEARCH = ApiEndPoints.TWITTER_SEARCH + tag
-				+ ApiEndPoints.RESULT_COUNT + count + ApiEndPoints.RESULT_TYPE
-				+ result_type;
-		return tag;
+		ApiEndPoints.TWITTER_DEFAULT_SEARCH = ApiEndPoints.TWITTER_SEARCH
+				+ hashTag + ApiEndPoints.RESULT_COUNT + count
+				+ ApiEndPoints.RESULT_TYPE + result_type;
+		return hashTag;
 	}
 
 	private void setUpTweetList(String tag) {
 
-		TextView tv = new TextView(getActivity());
-		tv.setText("tweets about " + tag);
-		mTweetList.addHeaderView(tv);
+		mHeaderView = new TextView(getActivity());
+		mHeaderView.setText("tweets about " + tag);
+		mTweetList.addHeaderView(mHeaderView);
 
 		AnimationUtils.setLoadingAnimation(mTweetList);
+	}
+
+	@Override
+	public void onPause() {
+		super.onPause();
+
 	}
 
 }

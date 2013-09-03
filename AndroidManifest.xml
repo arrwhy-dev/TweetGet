@@ -15,7 +15,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="com.TweetGet.activites.MainActivity"
+            android:name="com.TweetGet.Activites.MainActivity"
             android:launchMode="singleTop"
             android:label="TweetGet"
             android:screenOrientation="portrait" >
@@ -26,9 +26,9 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.TweetGet.activites.SearchActivity"
+            android:name="com.TweetGet.Activites.SearchActivity"
             android:label="@string/title_activity_hashtag_query"
-            android:parentActivityName="com.TweetGet.activites.MainActivity"
+            android:parentActivityName="com.TweetGet.Activites.MainActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" >
             <meta-data
@@ -36,10 +36,10 @@
                 android:value="com.TweetGet.Activites.MainActivity" />
         </activity>
         <activity
-            android:name="com.TweetGet.activites.PreferenceActivity"
+            android:name="com.TweetGet.Activites.PreferenceActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.TweetGet.activites.TransparentActivity"
+            android:name="com.TweetGet.Activites.TransparentActivity"
             android:screenOrientation="portrait" />
 
         <service

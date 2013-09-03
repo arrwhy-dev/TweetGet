@@ -12,7 +12,16 @@ public class User {
 	@SerializedName("profile_image_url")
 	private String mProfileImageUrl;
 	
-	private Bitmap profilePic;
+	@SerializedName("profile_background_image_url")
+	private String mProfileBannerImageUrl;
+	
+	@SerializedName("description")
+	private String mDescription;
+	
+	@SerializedName("name")
+	private String mName;
+	
+	private Bitmap mProfilePic;
 	
 	
 	public String getScreenName()
@@ -25,14 +34,24 @@ public class User {
 		return mProfileImageUrl;
 	}
 	
-	public Bitmap getProfilePic()
+	public Bitmap getProfileImageBitmap()
 	{
-		return profilePic;
+		return mProfilePic;
 	}
 	
-	public void setProfilePic(Bitmap profile)
+	public String getName()
 	{
-		profilePic=profile;
+		return mName;
+	}
+	
+	public void setProfileImageBitmap(Bitmap profile)
+	{
+		mProfilePic=profile;
+	}
+	
+	public String getDescription()
+	{
+		return mDescription;
 	}
 
 }

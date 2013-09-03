@@ -1,4 +1,4 @@
-package com.TweetGet.activites;
+package com.TweetGet.Activites;
 
 import android.animation.Animator;
 import android.animation.Animator.AnimatorListener;
@@ -16,6 +16,13 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 
 import com.TweetGet.R;
+/*
+ * TODO : FIX THIS TO PROPERLY LOAD A ZOOMED IN VERSION
+ * 			OF THE TWTITER PROFILE PIC, REQUIRES SOME INVESTIGATION
+ * 			ON ANIMATIONS.
+ * 
+ * 
+ */
 
 @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR1)
 public class TransparentActivity extends Activity {

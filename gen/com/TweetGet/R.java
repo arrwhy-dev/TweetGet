@@ -37,34 +37,41 @@ public final class R {
         public static final int list_item_vertial_margin=0x7f060002;
     }
     public static final class drawable {
-        public static final int action_search=0x7f020000;
-        public static final int drawer_shadow=0x7f020001;
-        public static final int gradient_bg=0x7f020002;
-        public static final int ic_drawer=0x7f020003;
-        public static final int ic_launcher=0x7f020004;
-        public static final int twitter=0x7f020005;
+        public static final int action_refresh=0x7f020000;
+        public static final int action_search=0x7f020001;
+        public static final int drawer_shadow=0x7f020002;
+        public static final int gradient_bg=0x7f020003;
+        public static final int ic_drawer=0x7f020004;
+        public static final int ic_launcher=0x7f020005;
+        public static final int twitter=0x7f020006;
     }
     public static final class id {
         public static final int LinearLayout1=0x7f0a0000;
-        public static final int Search=0x7f0a0013;
-        public static final int action_settings=0x7f0a0012;
+        public static final int action_settings=0x7f0a0018;
         public static final int backdrop=0x7f0a0008;
         public static final int button1=0x7f0a0002;
         public static final int content_frame=0x7f0a0005;
         public static final int cover=0x7f0a0007;
-        public static final int dateAndTime=0x7f0a000f;
+        public static final int dateAndTime=0x7f0a0015;
         public static final int drawer_layout=0x7f0a0004;
         public static final int editText1=0x7f0a0001;
-        public static final int group1=0x7f0a0010;
+        public static final int group1=0x7f0a0016;
         public static final int image=0x7f0a0009;
-        public static final int item1=0x7f0a0011;
+        public static final int item1=0x7f0a0017;
         public static final int left_drawer=0x7f0a0006;
         public static final int listView1=0x7f0a0003;
-        public static final int profileImage=0x7f0a000c;
-        public static final int relativeLayout1=0x7f0a000b;
-        public static final int tweet=0x7f0a000d;
+        public static final int no_wifi_cover=0x7f0a000b;
+        public static final int profileImage=0x7f0a0012;
+        public static final int profile_banner_image=0x7f0a000d;
+        public static final int relativeLayout1=0x7f0a0011;
+        public static final int search=0x7f0a0019;
+        public static final int timeline_header=0x7f0a000c;
+        public static final int timeline_profile_image=0x7f0a000e;
+        public static final int timeline_user_description=0x7f0a0010;
+        public static final int timeline_user_name=0x7f0a000f;
+        public static final int tweet=0x7f0a0013;
         public static final int tweetList=0x7f0a000a;
-        public static final int userName=0x7f0a000e;
+        public static final int userName=0x7f0a0014;
     }
     public static final class layout {
         public static final int activity_hashtag_query=0x7f030000;
@@ -73,8 +80,9 @@ public final class R {
         public static final int drawer_list_item=0x7f030003;
         public static final int dream_layout=0x7f030004;
         public static final int fragment_main_feed=0x7f030005;
-        public static final int item_row=0x7f030006;
-        public static final int preferenceslayout=0x7f030007;
+        public static final int fragment_timeline=0x7f030006;
+        public static final int item_row=0x7f030007;
+        public static final int preferenceslayout=0x7f030008;
     }
     public static final class menu {
         public static final int context=0x7f090000;
@@ -92,6 +100,8 @@ public final class R {
         public static final int drawer_open=0x7f070008;
         public static final int exit=0x7f07000a;
         public static final int hello_world=0x7f070002;
+        public static final int menu_item_refresh=0x7f07000e;
+        public static final int menu_item_search=0x7f07000d;
         public static final int profile_picture=0x7f07000c;
         public static final int search=0x7f070005;
         public static final int title_activity_hashtag_query=0x7f070004;

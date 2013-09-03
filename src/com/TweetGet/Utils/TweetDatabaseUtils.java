@@ -33,7 +33,7 @@ public class TweetDatabaseUtils {
 					values.put(TweetDatabase.Columns.USER_NAME, status
 							.getUser().getScreenName());
 					values.put(TweetDatabase.Columns.TWEET_TEXT,
-							status.getText());
+							status.getTweetText());
 					values.put(TweetDatabase.Columns.TWEET_DATE_TIME,
 							status.getDateTime());
 					
@@ -45,6 +45,4 @@ public class TweetDatabaseUtils {
 		};
 
 	}
-	
-
 }

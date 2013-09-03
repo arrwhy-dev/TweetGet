@@ -17,7 +17,6 @@ public class SharedPreferencesManager {
 	private SharedPreferences mSharedPreferences;
 
 	private SharedPreferencesManager(Context context) {
-
 		mSharedPreferences = PreferenceManager
 				.getDefaultSharedPreferences(context);
 	}

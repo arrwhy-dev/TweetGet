@@ -2,6 +2,7 @@ package com.TweetGet.Tasks;
 
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.lang.ref.WeakReference;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -14,21 +15,21 @@ import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.ListView;
 
+import com.TweetGet.Activites.MainActivity;
 import com.TweetGet.Adapters.TweetListAdapter;
 import com.TweetGet.EndPoints.ApiEndPoints;
 import com.TweetGet.EndPoints.ApiHeaders;
 import com.TweetGet.Managers.BearerTokenManager;
 import com.TweetGet.Models.statusesContainer;
 import com.TweetGet.Utils.TweetDatabaseUtils;
-import com.TweetGet.activites.MainActivity;
 import com.google.gson.Gson;
 
 public class SearchFeedTask extends AsyncTask<String, Void, statusesContainer> {
 
-	private Context mContext;
 	private ListView mListView;
+	private WeakReference<Context> mContext;
 
-	public SearchFeedTask(Context context, ListView listview) {
+	public SearchFeedTask(WeakReference<Context> context, ListView listview) {
 		mContext = context;
 		mListView = listview;
 	}
@@ -38,7 +39,8 @@ public class SearchFeedTask extends AsyncTask<String, Void, statusesContainer> {
 
 		try {
 
-			String authToken = BearerTokenManager.getBearerTokenSynch(mContext);
+			String authToken = BearerTokenManager
+					.getBearerTokenSynchronously(mContext.get());
 
 			DefaultHttpClient httpclient = new DefaultHttpClient(
 					new BasicHttpParams());
@@ -59,7 +61,7 @@ public class SearchFeedTask extends AsyncTask<String, Void, statusesContainer> {
 					.fromJson(new InputStreamReader(inputStream),
 							statusesContainer.class);
 
-			TweetDatabaseUtils.insertTweetsToDatabase(statuses, mContext);
+			//TweetDatabaseUtils.insertTweetsToDatabase(statuses, mContext.get());
 
 			return statuses;
 		} catch (Exception e) {
@@ -71,9 +73,10 @@ public class SearchFeedTask extends AsyncTask<String, Void, statusesContainer> {
 	@Override
 	protected void onPostExecute(statusesContainer statuses) {
 		try {
-			TweetListAdapter adapter = new TweetListAdapter(mContext, statuses);
+			TweetListAdapter adapter = new TweetListAdapter(mContext.get(),
+					statuses.getStatuses());
 			mListView.setAdapter(adapter);
-			MainActivity.mTweetListAdapter=adapter;
+			MainActivity.mTweetListAdapter = adapter;
 		} catch (Exception e) {
 			Log.e("GetFeedTask", "Error:" + e.getMessage());
 		}

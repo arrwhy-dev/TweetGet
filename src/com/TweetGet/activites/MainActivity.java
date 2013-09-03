@@ -1,7 +1,5 @@
-package com.TweetGet.activites;
+package com.TweetGet.Activites;
 
-import android.app.Activity;
-import android.content.Context;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
@@ -18,20 +16,21 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.SearchView;
 
 import com.TweetGet.R;
 import com.TweetGet.Adapters.TweetListAdapter;
 import com.TweetGet.Fragments.MainFeedFragment;
+import com.TweetGet.Fragments.TimelineFragment;
 
 public class MainActivity extends FragmentActivity {
 
-	public static Context mContext;
-	public static Activity mActivity;
 	public static TweetListAdapter mTweetListAdapter;
 	private String[] mDrawerOptions;
 	private DrawerLayout mDrawerLayout;
 	private ListView mDrawerList;
 	private ActionBarDrawerToggle mActionBarDrawerToggle;
+	private Fragment mFragment;
 	private CharSequence mDrawerTitle;
 	private CharSequence mTitle;
 	private static final int MAIN_FEED_FRAGMENT_POSITION = 0;
@@ -41,7 +40,6 @@ public class MainActivity extends FragmentActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		mActivity = this;
 
 		mTitle = mDrawerTitle = getTitle();
 		mDrawerOptions = getResources().getStringArray(
@@ -72,7 +70,7 @@ public class MainActivity extends FragmentActivity {
 		getActionBar().setHomeButtonEnabled(true);
 		mDrawerLayout.setDrawerListener(mActionBarDrawerToggle);
 		mDrawerList.setHeaderDividersEnabled(true);
-		selectItem(MAIN_FEED_FRAGMENT_POSITION);
+		selectItem(MAIN_FEED_FRAGMENT_POSITION, 1);
 
 	}
 
@@ -102,38 +100,87 @@ public class MainActivity extends FragmentActivity {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		getMenuInflater().inflate(R.menu.main, menu);
+		SearchView searchView = (SearchView) menu.findItem(R.id.search)
+				.getActionView();
+
+		setSearchListener(searchView);
+
 		return true;
+	}
+
+	private void setSearchListener(SearchView searchView) {
+
+		searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+			@Override
+			public boolean onQueryTextChange(String newText) {
+				return true;
+			}
+
+			@Override
+			public boolean onQueryTextSubmit(String query) {
+
+				String searchQuery = query.trim();
+				FragmentManager fm = getSupportFragmentManager();
+				Bundle data = new Bundle();
+				data.putString("query", searchQuery);
+				if (mFragment instanceof MainFeedFragment)
+				{
+				MainFeedFragment frag = new MainFeedFragment();
+				frag.setArguments(data);
+				fm.beginTransaction().replace(R.id.content_frame, frag)
+						.commit();
+				
+				}else if (mFragment instanceof TimelineFragment)
+				{
+					TimelineFragment frag = new TimelineFragment();
+					frag.setArguments(data);
+					fm.beginTransaction().replace(R.id.content_frame, frag)
+							.commit();
+				}
+
+				return true;
+			}
+		});
 	}
 
 	private class DrawerItemClickListener implements
 			ListView.OnItemClickListener {
+
+		protected int currentPosition;
+
 		@Override
-		public void onItemClick(AdapterView parent, View view, int position,
+		public void onItemClick(AdapterView<?> parent, View view, int position,
 				long id) {
-			selectItem(position);
+
+			selectItem(position, currentPosition);
+
 		}
 	}
 
-	private void selectItem(int position) {
+	private void selectItem(int position, int currentPosition) {
 
 		FragmentManager fragmentManager = getSupportFragmentManager();
 
-		Fragment fragment = null;
-		switch (position) {
-		case MAIN_FEED_FRAGMENT_POSITION:
-			fragment = new MainFeedFragment();
-			break;
+		if (currentPosition != position) {
+			switch (position) {
+			case MAIN_FEED_FRAGMENT_POSITION:
+				mFragment = new MainFeedFragment();
+				currentPosition = MAIN_FEED_FRAGMENT_POSITION;
+				break;
+			case ACCOUNT_SEARCH_FRAGMENT_POSITION:
+				mFragment = new TimelineFragment();
+				currentPosition = ACCOUNT_SEARCH_FRAGMENT_POSITION;
+				break;
 
-		case ACCOUNT_SEARCH_FRAGMENT_POSITION:
-			fragment = new MainFeedFragment();
-			break;
-
-		default:
-			break;
+			default:
+				break;
+			}
 		}
-		fragmentManager.beginTransaction()
-				.replace(R.id.content_frame, fragment).commit();
 
+		if (mFragment != null) {
+			fragmentManager.beginTransaction()
+					.replace(R.id.content_frame, mFragment).commit();
+		}
 		mDrawerList.setItemChecked(position, true);
 		setTitle(mDrawerOptions[position]);
 		mDrawerLayout.closeDrawer(mDrawerList);
@@ -143,12 +190,6 @@ public class MainActivity extends FragmentActivity {
 	public void setTitle(CharSequence title) {
 		mTitle = title;
 		getActionBar().setTitle(title);
-	}
-
-	@Override
-	public boolean onPrepareOptionsMenu(Menu menu) {
-		boolean drawerOpen = mDrawerLayout.isDrawerOpen(mDrawerList);
-		return super.onPrepareOptionsMenu(menu);
 	}
 
 	@Override

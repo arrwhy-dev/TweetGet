@@ -16,4 +16,22 @@
         android:layout_centerVertical="true" >
     </ListView>
 
+    <FrameLayout
+        android:id="@+id/no_wifi_cover"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:visibility="gone"
+         >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-thin"
+            android:layout_gravity="center"
+            android:textSize="20sp"
+            android:text="Woops check your wifi connection!" />
+    </FrameLayout>
+
 </RelativeLayout>

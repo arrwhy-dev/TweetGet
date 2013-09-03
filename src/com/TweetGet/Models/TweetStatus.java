@@ -5,20 +5,20 @@ import com.google.gson.annotations.SerializedName;
 public class TweetStatus {
 
 	@SerializedName("created_at")
-	private String mCreatedAt;
+	private String mCreationDate;
 
 	@SerializedName("text")
-	private String text;
+	private String mTweetText;
 
 	@SerializedName("user")
 	private User mUser;
 
 	public String getDateTime() {
-		return mCreatedAt;
+		return mCreationDate;
 	}
 
-	public String getText() {
-		return text;
+	public String getTweetText() {
+		return mTweetText;
 	}
 
 	public User getUser() {

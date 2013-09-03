@@ -39,32 +39,38 @@ public class BearerTokenManager {
 		return mBearerToken;
 
 	}
-	
-	public static String getBearerTokenSynch(Context context)
-	{
+
+	/*
+	 * Note this should not be called from the UI thread or else an exception
+	 * will be thrown.
+	 * This method exists solely to enable a synchronous call from an async task
+	 */
+	public static String getBearerTokenSynchronously(Context context) {
 		if (mBearerToken == null) {
 
 			try {
 				DefaultHttpClient httpclient = new DefaultHttpClient(
 						new BasicHttpParams());
 
-				HttpPost httppost = new HttpPost(ApiEndPoints.TWITTER_AUTH_TOKEN);
+				HttpPost httppost = new HttpPost(
+						ApiEndPoints.TWITTER_AUTH_TOKEN);
 				httppost.setHeader(ApiHeaders.AUTHORIZATION,
 						ApiEndPoints.getApiAuthKey());
 
-				httppost.setHeader(ApiHeaders.CONTENT_TYPE, ApiHeaders.UTF_ENCODING);
+				httppost.setHeader(ApiHeaders.CONTENT_TYPE,
+						ApiHeaders.UTF_ENCODING);
 				httppost.setEntity(new StringEntity(ApiHeaders.GRANT_TYPE));
 
 				HttpResponse response = httpclient.execute(httppost);
 				HttpEntity entity = response.getEntity();
-				
-				InputStream inputStream = entity.getContent();
-				
-				BearerTokenContainer bearerTokenContainer = new Gson()
-				.fromJson(new InputStreamReader(inputStream),
-						BearerTokenContainer.class);
 
-				mBearerToken= bearerTokenContainer.getAccessToken();
+				InputStream inputStream = entity.getContent();
+
+				BearerTokenContainer bearerTokenContainer = new Gson()
+						.fromJson(new InputStreamReader(inputStream),
+								BearerTokenContainer.class);
+
+				mBearerToken = bearerTokenContainer.getAccessToken();
 			} catch (Exception e) {
 				Log.e("GetBearerTokenTask", "Error:" + e.getMessage());
 				return null;
@@ -73,9 +79,8 @@ public class BearerTokenManager {
 
 		return mBearerToken;
 	}
-	
-	public static boolean hasBearerToken()
-	{
+
+	public static boolean hasBearerToken() {
 		return (mBearerToken != null);
 	}
 

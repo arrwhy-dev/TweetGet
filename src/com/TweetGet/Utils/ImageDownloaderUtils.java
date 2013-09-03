@@ -2,7 +2,6 @@ package com.TweetGet.Utils;
 
 import java.net.URL;
 
-import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
@@ -16,7 +15,7 @@ public class ImageDownloaderUtils extends AsyncTask<Void, Void, Bitmap> {
 	private com.TweetGet.Models.TweetStatus item;
 
 	public ImageDownloaderUtils(int position, ViewHolder holder, String url,
-			com.TweetGet.Models.TweetStatus item, Context c) {
+			com.TweetGet.Models.TweetStatus item) {
 		mPosition = position;
 		mHolder = holder;
 		this.item = item;
@@ -27,7 +26,7 @@ public class ImageDownloaderUtils extends AsyncTask<Void, Void, Bitmap> {
 	protected void onPostExecute(Bitmap bitmap) {
 		if (mHolder.position == mPosition) {
 			mHolder.profilePicture.setImageBitmap(bitmap);
-			item.getUser().setProfilePic(bitmap);
+			item.getUser().setProfileImageBitmap(bitmap);
 
 		}
 	}
