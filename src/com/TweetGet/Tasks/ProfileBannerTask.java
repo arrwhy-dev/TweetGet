@@ -1,7 +1,5 @@
 package com.TweetGet.Tasks;
 
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.lang.ref.WeakReference;
 import java.net.URL;
 
@@ -26,7 +24,6 @@ import com.TweetGet.EndPoints.ApiEndPoints;
 import com.TweetGet.EndPoints.ApiHeaders;
 import com.TweetGet.Managers.BearerTokenManager;
 import com.TweetGet.Models.TimelineBannerContainer;
-import com.google.gson.Gson;
 
 public class ProfileBannerTask extends
 		AsyncTask<TimelineBannerContainer, TimelineBannerContainer, TimelineBannerContainer> {

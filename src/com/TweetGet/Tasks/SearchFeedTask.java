@@ -21,7 +21,6 @@ import com.TweetGet.EndPoints.ApiEndPoints;
 import com.TweetGet.EndPoints.ApiHeaders;
 import com.TweetGet.Managers.BearerTokenManager;
 import com.TweetGet.Models.statusesContainer;
-import com.TweetGet.Utils.TweetDatabaseUtils;
 import com.google.gson.Gson;
 
 public class SearchFeedTask extends AsyncTask<String, Void, statusesContainer> {

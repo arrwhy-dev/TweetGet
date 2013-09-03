@@ -6,6 +6,7 @@ import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
@@ -70,7 +71,7 @@ public class MainActivity extends FragmentActivity {
 		getActionBar().setHomeButtonEnabled(true);
 		mDrawerLayout.setDrawerListener(mActionBarDrawerToggle);
 		mDrawerList.setHeaderDividersEnabled(true);
-		selectItem(MAIN_FEED_FRAGMENT_POSITION, 1);
+		selectItem(MAIN_FEED_FRAGMENT_POSITION, 3);
 
 	}
 
@@ -123,19 +124,26 @@ public class MainActivity extends FragmentActivity {
 				FragmentManager fm = getSupportFragmentManager();
 				Bundle data = new Bundle();
 				data.putString("query", searchQuery);
-				if (mFragment instanceof MainFeedFragment)
-				{
-				MainFeedFragment frag = new MainFeedFragment();
-				frag.setArguments(data);
-				fm.beginTransaction().replace(R.id.content_frame, frag)
-						.commit();
-				
-				}else if (mFragment instanceof TimelineFragment)
-				{
+				if (mFragment instanceof MainFeedFragment) {
+					MainFeedFragment frag = new MainFeedFragment();
+					frag.setArguments(data);
+
+					FragmentTransaction ft = fm.beginTransaction();
+					ft.add(R.id.content_frame, frag,"main");
+					Fragment fragment = fm.findFragmentByTag("main");
+					ft.remove(fragment);
+					ft.addToBackStack("main");
+					ft.commit();
+
+				} else if (mFragment instanceof TimelineFragment) {
 					TimelineFragment frag = new TimelineFragment();
 					frag.setArguments(data);
-					fm.beginTransaction().replace(R.id.content_frame, frag)
-							.commit();
+					FragmentTransaction ft = fm.beginTransaction();
+					ft.add(R.id.content_frame, frag,"account");
+					Fragment fragment = fm.findFragmentByTag("account");
+					ft.remove(fragment);
+					ft.addToBackStack("account");
+					ft.commit();
 				}
 
 				return true;
@@ -159,27 +167,25 @@ public class MainActivity extends FragmentActivity {
 
 	private void selectItem(int position, int currentPosition) {
 
-		FragmentManager fragmentManager = getSupportFragmentManager();
+		String tag = "";
+		switch (position) {
+		case MAIN_FEED_FRAGMENT_POSITION:
+			mFragment = new MainFeedFragment();
+			currentPosition = MAIN_FEED_FRAGMENT_POSITION;
+			tag = "main";
+			break;
+		case ACCOUNT_SEARCH_FRAGMENT_POSITION:
+			mFragment = new TimelineFragment();
+			currentPosition = ACCOUNT_SEARCH_FRAGMENT_POSITION;
+			tag = "account";
+			break;
 
-		if (currentPosition != position) {
-			switch (position) {
-			case MAIN_FEED_FRAGMENT_POSITION:
-				mFragment = new MainFeedFragment();
-				currentPosition = MAIN_FEED_FRAGMENT_POSITION;
-				break;
-			case ACCOUNT_SEARCH_FRAGMENT_POSITION:
-				mFragment = new TimelineFragment();
-				currentPosition = ACCOUNT_SEARCH_FRAGMENT_POSITION;
-				break;
-
-			default:
-				break;
-			}
 		}
 
 		if (mFragment != null) {
-			fragmentManager.beginTransaction()
-					.replace(R.id.content_frame, mFragment).commit();
+			getSupportFragmentManager().beginTransaction()
+					.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+					.replace(R.id.content_frame, mFragment, tag).commit();
 		}
 		mDrawerList.setItemChecked(position, true);
 		setTitle(mDrawerOptions[position]);

@@ -24,7 +24,7 @@
     <string-array name="nav_drawer_menu_options">
         <item>Topic</item>
         <item>User</item>
-        <item>Trending</item>
+      
     </string-array>
 
 </resources>
