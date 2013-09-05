@@ -24,7 +24,6 @@ public class MainActivity extends FragmentActivity {
 
 	public static TweetListAdapter mTweetListAdapter;
 	private DrawerManager mDrawerManager;
-	private SearchView mSearchView;
 	private MenuItem mSearchViewMenuItem;
 
 	private static final class FragmentTags {
@@ -67,9 +66,9 @@ public class MainActivity extends FragmentActivity {
 	public boolean onCreateOptionsMenu(Menu menu) {
 		getMenuInflater().inflate(R.menu.main, menu);
 		mSearchViewMenuItem = menu.findItem(R.id.search);
-		mSearchView = (SearchView) mSearchViewMenuItem.getActionView();
+		SearchView searchView = (SearchView) mSearchViewMenuItem.getActionView();
 		
-		setSearchListener(mSearchView);
+		setSearchListener(searchView);
 
 		return true;
 	}
