@@ -21,6 +21,7 @@ import com.TweetGet.EndPoints.ApiEndPoints;
 import com.TweetGet.EndPoints.ApiHeaders;
 import com.TweetGet.Managers.BearerTokenManager;
 import com.TweetGet.Models.statusesContainer;
+import com.TweetGet.Utils.TweetDatabaseUtils;
 import com.google.gson.Gson;
 
 public class SearchFeedTask extends AsyncTask<String, Void, statusesContainer> {
@@ -60,7 +61,7 @@ public class SearchFeedTask extends AsyncTask<String, Void, statusesContainer> {
 					.fromJson(new InputStreamReader(inputStream),
 							statusesContainer.class);
 
-			//TweetDatabaseUtils.insertTweetsToDatabase(statuses, mContext.get());
+			TweetDatabaseUtils.insertTweetsToDatabase(statuses, mContext.get());
 
 			return statuses;
 		} catch (Exception e) {

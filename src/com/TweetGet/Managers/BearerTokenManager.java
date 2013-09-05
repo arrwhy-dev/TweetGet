@@ -72,7 +72,7 @@ public class BearerTokenManager {
 
 				mBearerToken = bearerTokenContainer.getAccessToken();
 			} catch (Exception e) {
-				Log.e("GetBearerTokenTask", "Error:" + e.getMessage());
+				Log.e("getBearerTokenSynchronously", "Error:" + e.getMessage());
 				return null;
 			}
 		}

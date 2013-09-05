@@ -22,7 +22,7 @@ public class TweetDatabaseUtils {
 			protected Void doInBackground(Void... params) {
 
 				TweetDatabase tweetDb = new TweetDatabase(context,
-						"TweetTable", null, 1);
+						"TweetTable.db", null, 1);
 
 				List<TweetStatus> statuses = container.getStatuses();
 				SQLiteDatabase db = tweetDb.getWritableDatabase();
@@ -42,7 +42,7 @@ public class TweetDatabaseUtils {
 				}
 				return null;
 			}
-		};
+		}.execute();
 
 	}
 }
