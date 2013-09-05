@@ -83,8 +83,10 @@ public class MainActivity extends FragmentActivity {
 			@Override
 			public boolean onQueryTextSubmit(String query) {
 
+				String searchQuery = query.trim();
+				FragmentManager fm = getSupportFragmentManager();
 				Bundle data = new Bundle();
-				data.putString("query", query.trim());
+				data.putString("query", searchQuery);
 				Fragment frag = mDrawerManager.getSelectedFragment();
 				String tag = "";
 
@@ -99,12 +101,11 @@ public class MainActivity extends FragmentActivity {
 				}
 				if (frag != null) {
 					frag.setArguments(data);
-					FragmentManager fm = getSupportFragmentManager();
 					FragmentTransaction ft = fm.beginTransaction();
 					ft.add(R.id.content_frame, frag, tag);
 					Fragment fragment = fm.findFragmentByTag(tag);
 					ft.remove(fragment);
-					ft.addToBackStack(tag);
+					ft.addToBackStack(null);
 					ft.commit();
 
 				}

@@ -13,6 +13,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.TweetGet.R;
+import com.TweetGet.Fragments.BaseFeedFragment;
 import com.TweetGet.Fragments.MainFeedFragment;
 import com.TweetGet.Fragments.TimelineFragment;
 
@@ -112,12 +113,12 @@ public class DrawerManager {
 		case MAIN_FEED_FRAGMENT_POSITION:
 			mFragment = new MainFeedFragment();
 			currentPosition = MAIN_FEED_FRAGMENT_POSITION;
-			tag = "main";
+			tag = "HASHTAG";
 			break;
 		case ACCOUNT_SEARCH_FRAGMENT_POSITION:
 			mFragment = new TimelineFragment();
 			currentPosition = ACCOUNT_SEARCH_FRAGMENT_POSITION;
-			tag = "account";
+			tag = "USER";
 			break;
 
 		}

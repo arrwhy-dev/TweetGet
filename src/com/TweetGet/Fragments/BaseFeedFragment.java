@@ -18,6 +18,9 @@ public abstract class BaseFeedFragment extends Fragment {
 	private TextView mHeaderView;
 	private FrameLayout mCover;
 
+	public static final String HASHTAG_FRAGMENT_TAG = "HASHTAG";
+	public static final String USER_FRAGMENT_TAG = "USER";
+
 	protected abstract void fetchDataAsynchronously();
 
 	@Override
