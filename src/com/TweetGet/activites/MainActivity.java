@@ -24,6 +24,8 @@ public class MainActivity extends FragmentActivity {
 
 	public static TweetListAdapter mTweetListAdapter;
 	private DrawerManager mDrawerManager;
+	private SearchView mSearchView;
+	private MenuItem mSearchViewMenuItem;
 
 	private static final class FragmentTags {
 		public static final String HASHTAG_FRAGMENT = "HASHTAG";
@@ -64,10 +66,10 @@ public class MainActivity extends FragmentActivity {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		getMenuInflater().inflate(R.menu.main, menu);
-		SearchView searchView = (SearchView) menu.findItem(R.id.search)
-				.getActionView();
-
-		setSearchListener(searchView);
+		mSearchViewMenuItem = menu.findItem(R.id.search);
+		mSearchView = (SearchView) mSearchViewMenuItem.getActionView();
+		
+		setSearchListener(mSearchView);
 
 		return true;
 	}
@@ -109,6 +111,7 @@ public class MainActivity extends FragmentActivity {
 					ft.commit();
 
 				}
+				mSearchViewMenuItem.collapseActionView();
 				return true;
 			}
 		});

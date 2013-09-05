@@ -1,21 +1,17 @@
 package com.TweetGet.Managers;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.entity.StringEntity;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.params.BasicHttpParams;
 
 import android.content.Context;
 import android.util.Log;
 
-import com.TweetGet.EndPoints.ApiEndPoints;
-import com.TweetGet.EndPoints.ApiHeaders;
 import com.TweetGet.Models.BearerTokenContainer;
+import com.TweetGet.Network.ApiPosts;
 import com.TweetGet.Tasks.BearerTokenTask;
 import com.google.gson.Gson;
 
@@ -42,26 +38,15 @@ public class BearerTokenManager {
 
 	/*
 	 * Note this should not be called from the UI thread or else an exception
-	 * will be thrown.
-	 * This method exists solely to enable a synchronous call from an async task
+	 * will be thrown. This method exists solely to enable a synchronous call
+	 * from an async task
 	 */
 	public static String getBearerTokenSynchronously(Context context) {
 		if (mBearerToken == null) {
 
 			try {
-				DefaultHttpClient httpclient = new DefaultHttpClient(
-						new BasicHttpParams());
 
-				HttpPost httppost = new HttpPost(
-						ApiEndPoints.TWITTER_AUTH_TOKEN);
-				httppost.setHeader(ApiHeaders.AUTHORIZATION,
-						ApiEndPoints.getApiAuthKey());
-
-				httppost.setHeader(ApiHeaders.CONTENT_TYPE,
-						ApiHeaders.UTF_ENCODING);
-				httppost.setEntity(new StringEntity(ApiHeaders.GRANT_TYPE));
-
-				HttpResponse response = httpclient.execute(httppost);
+				HttpResponse response = ApiPosts.postToBearerToken();
 				HttpEntity entity = response.getEntity();
 
 				InputStream inputStream = entity.getContent();
@@ -71,10 +56,10 @@ public class BearerTokenManager {
 								BearerTokenContainer.class);
 
 				mBearerToken = bearerTokenContainer.getAccessToken();
-			} catch (Exception e) {
-				Log.e("getBearerTokenSynchronously", "Error:" + e.getMessage());
-				return null;
+			} catch (IOException e) {
+				Log.e("getBearerTokenSynchronously", "IO-Exception:" + e.getMessage());
 			}
+
 		}
 
 		return mBearerToken;

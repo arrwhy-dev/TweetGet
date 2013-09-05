@@ -13,7 +13,6 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.TweetGet.R;
-import com.TweetGet.Fragments.BaseFeedFragment;
 import com.TweetGet.Fragments.MainFeedFragment;
 import com.TweetGet.Fragments.TimelineFragment;
 
