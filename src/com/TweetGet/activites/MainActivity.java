@@ -15,14 +15,12 @@ import android.view.View;
 import android.widget.SearchView;
 
 import com.TweetGet.R;
-import com.TweetGet.Adapters.TweetListAdapter;
 import com.TweetGet.Fragments.MainFeedFragment;
 import com.TweetGet.Fragments.TimelineFragment;
 import com.TweetGet.Managers.DrawerManager;
 
 public class MainActivity extends FragmentActivity {
 
-	public static TweetListAdapter mTweetListAdapter;
 	private DrawerManager mDrawerManager;
 	private MenuItem mSearchViewMenuItem;
 
@@ -66,8 +64,9 @@ public class MainActivity extends FragmentActivity {
 	public boolean onCreateOptionsMenu(Menu menu) {
 		getMenuInflater().inflate(R.menu.main, menu);
 		mSearchViewMenuItem = menu.findItem(R.id.search);
-		SearchView searchView = (SearchView) mSearchViewMenuItem.getActionView();
-		
+		SearchView searchView = (SearchView) mSearchViewMenuItem
+				.getActionView();
+
 		setSearchListener(searchView);
 
 		return true;

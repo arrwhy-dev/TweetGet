@@ -16,6 +16,15 @@ public class TweetStatus {
 	public String getDateTime() {
 		return mCreationDate;
 	}
+	
+	public String getFormatedDateTime()
+	{
+	
+		String [] a = mCreationDate.split("\\+");
+		String s = a[0] + a[1].split(" ")[1];
+		
+		return s;
+	}
 
 	public String getTweetText() {
 		return mTweetText;

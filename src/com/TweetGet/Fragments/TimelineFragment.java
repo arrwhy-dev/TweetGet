@@ -14,7 +14,7 @@ import com.TweetGet.EndPoints.ApiEndPoints;
 import com.TweetGet.Managers.SharedPreferencesManager;
 import com.TweetGet.Tasks.TimelineTask;
 
-public class TimelineFragment extends BaseFeedFragment {
+public class TimelineFragment extends AbsFeedFragment {
 
 	private RelativeLayout mBanner;
 

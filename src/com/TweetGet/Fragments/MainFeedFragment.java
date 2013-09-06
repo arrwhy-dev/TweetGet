@@ -13,7 +13,7 @@ import com.TweetGet.EndPoints.ApiEndPoints;
 import com.TweetGet.Managers.SharedPreferencesManager;
 import com.TweetGet.Tasks.SearchFeedTask;
 
-public class MainFeedFragment extends BaseFeedFragment {
+public class MainFeedFragment extends AbsFeedFragment {
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,

@@ -52,7 +52,7 @@ public class TweetListAdapter extends BaseAdapter {
 
 		holder.tweetText.setText(item.getTweetText());
 		holder.userId.setText(item.getUser().getScreenName());
-		holder.dateAndTime.setText(item.getDateTime());
+		holder.dateAndTime.setText(item.getFormatedDateTime());
 		holder.position = position;
 
 		getProfilePic(item, position, holder);

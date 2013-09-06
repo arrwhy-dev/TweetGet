@@ -13,7 +13,6 @@ import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.ListView;
 
-import com.TweetGet.Activites.MainActivity;
 import com.TweetGet.Adapters.TweetListAdapter;
 import com.TweetGet.EndPoints.ApiEndPoints;
 import com.TweetGet.Managers.BearerTokenManager;
@@ -65,7 +64,6 @@ public class SearchFeedTask extends AsyncTask<String, Void, statusesContainer> {
 			TweetListAdapter adapter = new TweetListAdapter(mContext.get(),
 					statuses.getStatuses());
 			mListView.setAdapter(adapter);
-			MainActivity.mTweetListAdapter = adapter;
 		} catch (Exception e) {
 			Log.e("GetFeedTask", "Error:" + e.getMessage());
 		}
