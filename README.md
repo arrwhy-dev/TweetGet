@@ -14,7 +14,7 @@ Users can also search for any hashtag to receive a list of tweets
 </br>
 The app features a variety of settings which allow for:
 <ul>
-<li>Tweet caching/offline mode</li>
+<li>Search by Topic (HashTag) and by user (Twitter handle)</li>
 <li>Specify the number of tweets to load by default</li>
 <li>Specify the type of tweets you'd like to receive (popular, recent, mixed)</li>
 </ul>
